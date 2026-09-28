@@ -37,3 +37,46 @@
     "layout/sidebar",
     "layout/json_cv"
 ;
+
+/* ==========================================================================
+   Site-specific layout overrides
+   ========================================================================== */
+
+/* Keep the footer in normal flow so it never covers the sidebar or content */
+.page__footer {
+  position: relative;
+  bottom: auto;
+}
+
+/* Sidebar scrolls with the page instead of being pinned to the viewport */
+@media screen and (min-width: $sidebar-screen-min-width) {
+  .sidebar {
+    position: relative;
+    height: auto;
+    overflow-y: visible;
+    padding-top: 0;
+  }
+}
+
+/* Wider sidebar (3/12 instead of 2/12) and a matching main column */
+@include breakpoint($large) {
+  .sidebar {
+    @include span(3 of 12);
+  }
+  .page {
+    @include span(9 of 12 last);
+    @include prefix(0.5 of 12);
+    @include suffix(1 of 12);
+  }
+}
+
+@include breakpoint($x-large) {
+  .sidebar {
+    max-width: 340px;
+  }
+}
+
+/* Let long sidebar entries (e.g. the university name) wrap instead of truncating */
+.author__urls li {
+  white-space: normal;
+}
