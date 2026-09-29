@@ -48,13 +48,17 @@
   bottom: auto;
 }
 
-/* Sidebar scrolls with the page instead of being pinned to the viewport */
+/* Sidebar scrolls with the page instead of being pinned to the viewport.
+   `top` cancels the offset from the .sticky class, and padding-top needs
+   !important because the navigation script sets it inline to the masthead
+   height, which is only needed for a fixed sidebar. */
 @media screen and (min-width: $sidebar-screen-min-width) {
   .sidebar {
     position: relative;
+    top: 0;
     height: auto;
     overflow-y: visible;
-    padding-top: 0;
+    padding-top: 0 !important;
   }
 }
 
@@ -67,6 +71,11 @@
     @include span(9 of 12 last);
     @include prefix(0.5 of 12);
     @include suffix(1 of 12);
+  }
+  /* list pages (Research, Presentations, Teaching, CV) use .archive */
+  .archive {
+    @include span(9 of 12 last);
+    @include prefix(0.5 of 12);
   }
 }
 
